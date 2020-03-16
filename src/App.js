@@ -13,14 +13,12 @@ export default class App extends Component {
   componentDidMount() {
     this.getProducts();
   }
-  addToCard = (product) => {
+  addToCard = product => {
     let newCart = this.state.cart;
-    var addedItem = newCart.find(c=> c.product.id === product.id)
-    if(addedItem) {
-      addedItem.quantity += 1
-    } else {
-      newCart.push({ product: product, quantity: 1 });
-    }
+    var addedItem = newCart.find(c => c.product.id === product.id);
+    addedItem
+      ? (addedItem.quantity += 1)
+      : newCart.push({ product: product, quantity: 1 });
     this.setState({ cart: newCart });
   };
   changeCategory = category => {
@@ -50,7 +48,7 @@ export default class App extends Component {
       <div>
         <Container>
           <Col xs="12">
-            <Navi cart={this.state.cart}/>
+            <Navi cart={this.state.cart} />
           </Col>
           <Row className="bodycim">
             <Col xs="2">
