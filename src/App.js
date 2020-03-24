@@ -10,17 +10,19 @@ export default class App extends Component {
     products: [],
     cart: []
   };
+
   componentDidMount() {
     this.getProducts();
   }
   addToCard = product => {
     let newCart = this.state.cart;
-    var addedItem = newCart.find(c => c.product.id === product.id);
+    let addedItem = newCart.find(c => c.product.id === product.id);
     addedItem
       ? (addedItem.quantity += 1)
       : newCart.push({ product: product, quantity: 1 });
     this.setState({ cart: newCart });
   };
+
   changeCategory = category => {
     this.setState({ currentCategory: category.categoryName });
     this.getProducts(category.id);
@@ -33,12 +35,13 @@ export default class App extends Component {
     }
     fetch(url)
       .then(res => res.json())
-      .then(data => this.setState({ products: data }));
+      .then(data => this.setState({ products: data }))
+      .catch(err => console.error(err));
   };
+
   render() {
     let categoryItem = {
-      title: "Category Item",
-      product: "Macbook Pro 2020"
+      title: "Category Item"
     };
 
     let productItem = {
